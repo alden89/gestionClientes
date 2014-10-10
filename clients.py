@@ -14,7 +14,6 @@ from addPayment import AgregarPago
 from comun import ventana_mensaje, imgAndLabel
 from payments import Pagos
 from about import About
-from search import match_func, search
 class Clientes(object):
     
     #===========================================================================
@@ -163,17 +162,7 @@ class Clientes(object):
             ventana_mensaje(self.ventanaClientes, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Debe seleccionar un cliente.')
            
     #===========================================================================
-        
-    def click_buscar(self, widget):
-        pass
 
-    #===========================================================================
-
-    def click_ver_todo(self, wigdet):
-        self.cargarVista('clientes')
-    
-    #===========================================================================
-    
     def ventana_foto(self):
         self.builderFoto = gtk.Builder()
         if self.sistemaop == 'linux2':
