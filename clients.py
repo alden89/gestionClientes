@@ -173,6 +173,7 @@ class Clientes(object):
         self.ventanaFoto = self.builderFoto.get_object("ventanaFoto")
         self.etiquetaFoto = self.builderFoto.get_object("etiquetaFoto")
         self.imagenFoto = self.builderFoto.get_object("iFoto")
+        self.ventanaFoto.set_transient_for(self.ventanaClientes)
         self.idFoto = ''
         
         self.builderFoto.connect_signals(self)            
@@ -194,6 +195,7 @@ class Clientes(object):
                     self.ruta = 'pictures/'+fila[0]+'_'+fila[1]
                 else:
                     self.ruta = 'pictures\\'+fila[0]+'_'+fila[1]
+                print self.ruta
                 salida = open(self.ruta,'wb')#nombre del archivo que se va a guardar (cualquier nombre) en el archivo de salida
                 self.archivo = fila[0]+fila[1]
                 salida.write(resultado[0])#escribe el resultado en el archivo de salida
@@ -216,10 +218,10 @@ class Clientes(object):
     def borrar_foto(self, widget):
             conf = ventana_mensaje(self.ventanaClientes,gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, '¿Desea realmente eliminar la foto de este usuario?')
             if conf:   
-                sql='DELETE FROM fotos WHERE ci = %s'
+                sql="DELETE FROM fotos WHERE ci = '%s'"
                 self.cursor.execute(sql%(self.idFoto))
-                cursor.execute(sql)
-                conexion.commit()
+                self.cursor.execute(sql)
+                self.conexion.commit()
                 self.conexion.commit()
                 self.ventanaFoto.destroy()
                 ventana_mensaje(self.ventanaFoto, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'La foto fue eliminada correctamente!')

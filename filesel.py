@@ -11,6 +11,7 @@ class FileSelection(object):
 	    # Obtener el nombre del fichero seleccionado e imprimirlo a la consola
       def file_ok_sel(self, w):
         archivo = unicode(self.filew.get_filename(),"utf-8")
+        print archivo
         gtk.Object.destroy(self.filew)
         if archivo:
           tipoImg = tipo.what(archivo)
@@ -21,7 +22,8 @@ class FileSelection(object):
                   # fin = open(archivo,"r")#abre archivo ingresar a base de datos
                   # img = sqlite3.Binary(fin.read()) 
                   # fin.close() #cierra el archivo
-                  imgdata = open(archivo, 'r').read()
+                  imgdata = open(archivo, "rb").read()
+                  print len(imgdata)
                   buff = sqlite3.Binary(imgdata)
               except IOError: #excepcion en caso de error
                   ventana_mensaje(self.filew, gtk.MESSAGE_ERROR, gtk.BUTTONS_CLOSE, 'No se puede abrir archivo %s' % self.foto.get_filename())
@@ -57,5 +59,5 @@ class FileSelection(object):
 
         # Fijamos el nombre de fichero, como si fuese un dialogo de guardado,
         # y damos un nombre por defecto
-        
+        self.filew.set_position(gtk.WIN_POS_CENTER_ALWAYS)
         self.filew.show()
