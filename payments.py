@@ -94,7 +94,7 @@ class Pagos(object):
         if itera != None:
             # Se asocian a los campos de edición los valores seleccionados
             fila = list(model[itera])
-            pago = AgregarPago(fila, self.cursor, self.conexion,self.ventanaPagos)
+            pago = AgregarPago(fila, self.cursor, self.conexion,self.ventanaPagos, True, self.vistaPagos)
         else:
             ventana_mensaje(self.ventanaPagos, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Debe seleccionar una fila.')
       def imprimir_recibo(self, widget):

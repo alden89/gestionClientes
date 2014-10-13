@@ -153,10 +153,19 @@ class Clientes(object):
             conf = ventana_mensaje(self.ventanaClientes,gtk.MESSAGE_QUESTION, gtk.BUTTONS_YES_NO, '¿Desea realmente eliminar el registro seleccionado?')    
             if conf:
                 # Se recupera el ID, único campo necesario para eliminar
-                fila = list(model[itera])                   
+                fila = list(model[itera])
+                #eliminamos el cliente de la base de datos                   
                 sql='delete from clientes where ci = %s'
                 self.cursor.execute(sql%(fila[0]))
-                self.conexion.commit()           
+                self.conexion.commit()
+                #eliminamos la foto del cliente
+                sql='delete from fotos where ci = %s'
+                self.cursor.execute(sql%(fila[0]))
+                self.conexion.commit()
+                #eliminamos los pagos del cliente para que no quede basura en la BD
+                sql='delete from pagos where ci = %s'
+                self.cursor.execute(sql%(fila[0]))
+                self.conexion.commit()
                 self.cargarVista('Eliminado') # Se llena la vista con los registros (False indica que no es la carga inicial)
         else:
             ventana_mensaje(self.ventanaClientes, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Debe seleccionar un cliente.')
@@ -241,7 +250,7 @@ class Clientes(object):
         if itera != None:
             # Se asocian a los campos de edición los valores seleccionados
             fila = list(model[itera])
-            pago = AgregarPago(fila, self.cursor, self.conexion, self.ventanaClientes)
+            pago = AgregarPago(fila, self.cursor, self.conexion, self.ventanaClientes, False, None)
         else:
             ventana_mensaje(self.ventanaClientes, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, 'Debe seleccionar un cliente.')
     #===========================================================================

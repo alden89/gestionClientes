@@ -31,7 +31,7 @@ class CreateDatabase(object):
         	nombre VARCHAR DEFAULT NULL, 
         	apellido VARCHAR DEFAULT NULL, 
         	monto INTEGER DEFAULT NULL, 
-        	fechaPago TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+        	fechaPago DATETIME NOT NULL DEFAULT (DATETIME(current_timestamp, 'localtime')), 
         	PRIMARY KEY ( ci, fechaPago)
         	)"""
 		cursor.execute(sql)
