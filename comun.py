@@ -50,9 +50,7 @@ class Recibo(object):
 
     Firma
 
-    …..................................
-
-    Aclaración""")
+    …..................................""")
     self.contenido = dict(numeroRecibo = numeroRecibo,
                      monto=monto,
                      ciudad=ciudad,
