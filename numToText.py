@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-from itertools import ifilter
-
 UNIDADES = (
     '',
     'UN ',
@@ -76,7 +74,7 @@ def to_word(number):
             converted += 'UN '
         elif(int(cientos) > 0):
             converted += '%s ' % __convert_group(cientos)
-
+    print converted
     return converted
 
 
@@ -99,5 +97,5 @@ def __convert_group(n):
             output += '%s%s' % (DECENAS[int(n[1]) - 2], UNIDADES[int(n[2])])
 
     return output
-if __name__ == '__main__':
-    to_word(1000589)
+# if __name__ == '__main__':
+#      to_word(1589785)
